@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/poetry_db
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  redis:
+      host: 127.0.0.1
+      port: 6379
+      jedis:
+        pool:
+          max-active: 100
+          max-idle: 10
+          max-wait: 100000
+      timeout: 5000
+      database: 0 #默认是索引为0的数据库
+
+server:
+  port: 8090
+  servlet:
+    context-path: /poetry
+

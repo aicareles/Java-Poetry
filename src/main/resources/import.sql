@@ -1,0 +1,13 @@
+INSERT INTO `user_info` (`uid`,`username`,`name`,`password`,`salt`,`state`) VALUES ('1', 'admin', '管理员', 'd3c59d25033dbf980d29554025c23a75', '8d78869f470951332959580424d4bf4f', 0);
+INSERT INTO `sys_permission` (`id`,`available`,`name`,`parent_id`,`parent_ids`,`permission`,`resource_type`,`url`) VALUES (1,0,'通过诗人名称、诗标题、诗内容等  获该相关信息',0,'0/','poetrys:searchPoetry','menu','poetrys/searchPoetry');
+INSERT INTO `sys_permission` (`id`,`available`,`name`,`parent_id`,`parent_ids`,`permission`,`resource_type`,`url`) VALUES (2,0,'随机获取推荐的一篇文章',1,'0/1','poetrys:randomOnePoetry','button','poetrys/randomOnePoetry');
+INSERT INTO `sys_permission` (`id`,`available`,`name`,`parent_id`,`parent_ids`,`permission`,`resource_type`,`url`) VALUES (3,0,'随机获取推荐的十篇文章',1,'0/1','poetrys:randomTenPoetry','button','poetrys/randomTenPoetry');
+INSERT INTO `sys_permission` (`id`,`available`,`name`,`parent_id`,`parent_ids`,`permission`,`resource_type`,`url`) VALUES (3,0,'查询诗人信息',1,'0/1','poem:poemInfo','button','poem/poemInfos');
+INSERT INTO `sys_role` (`id`,`available`,`description`,`role`) VALUES (1,0,'管理员','admin');
+INSERT INTO `sys_role` (`id`,`available`,`description`,`role`) VALUES (2,0,'VIP会员','vip');
+INSERT INTO `sys_role` (`id`,`available`,`description`,`role`) VALUES (3,1,'test','test');
+INSERT INTO `sys_role_permission` VALUES ('1', '1');
+INSERT INTO `sys_role_permission` (`permission_id`,`role_id`) VALUES (1,1);
+INSERT INTO `sys_role_permission` (`permission_id`,`role_id`) VALUES (2,1);
+INSERT INTO `sys_role_permission` (`permission_id`,`role_id`) VALUES (3,2);
+INSERT INTO `sys_user_role` (`role_id`,`uid`) VALUES (1,1);

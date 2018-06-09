@@ -14,6 +14,8 @@ spring:
   thymeleaf:
       cache: false
       mode: LEGACYHTML5
+      prefix: classpath:/templates/
+#      suffix: .html
 
   redis:
       host: 127.0.0.1

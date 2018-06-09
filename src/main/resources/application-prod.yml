@@ -28,7 +28,6 @@ spring:
         database: 0 #默认是索引为0的数据库
 
 
-
 server:
   port: 80
   servlet:

@@ -7,9 +7,9 @@ import java.util.concurrent.TimeUnit;
 /**
  * K 指以hash结构操作时 键类型
  * T 为数据实体 应实现序列化接口,并定义serialVersionUID * RedisTemplate 提供了五种数据结构操作类型 hash / list / set / zset / value
- * 方法命名格式为 数据操作类型 + 操作 如 hashPut 指以hash结构(也就是map)想key添加键值对 * Created by hp on 2018/3/1.
+ * 方法命名格式为 数据操作类型 + 操作 如 hashPut 指以hash结构(也就是map)想key添加键值对
  */
-public interface RedisDBHelper<HK, T> {
+public interface RedisHelper<HK, T> {
     /**
      * Hash结构 添加元素 * @param key key * @param hashKey hashKey * @param domain 元素
      */
@@ -46,6 +46,21 @@ public interface RedisDBHelper<HK, T> {
      * List结构 移除并获取数组第一个元素 * @param key * @return
      */
     T listLPop(String key);
+
+    /**
+     * 对象的实体类
+     * @param key
+     * @param domain
+     * @return
+     */
+    void valuePut(String key, T domain);
+
+    /**
+     * 获取对象实体类
+     * @param key
+     * @return
+     */
+    T getValue(String key);
 
     void remove(String key);
 

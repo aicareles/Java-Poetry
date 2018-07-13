@@ -18,11 +18,11 @@ public class GlobalExceptionHandler {
 
     private static Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
-    @ExceptionHandler(RuntimeException.class)
-    @ResponseBody
-    public Result resultError(){
-        return ResultUtils.error(ResultCode.SERVER_EXCEPTION);
-    }
+//    @ExceptionHandler(RuntimeException.class)
+//    @ResponseBody
+//    public Result resultError(){
+//        return ResultUtils.error(ResultCode.SERVER_EXCEPTION);
+//    }
 
     //在抛出参数异常时  会统一回调该方法
     @ResponseStatus(HttpStatus.OK)

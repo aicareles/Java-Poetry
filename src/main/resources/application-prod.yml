@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url:
-    username:
-    password:
+    url: jdbc:mysql://47.104.93.195:3306/poetry_db?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: Rootizm5eeveJakqr12345!
     driver-class-name: com.mysql.jdbc.Driver
 
   jpa:

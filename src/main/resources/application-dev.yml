@@ -28,8 +28,14 @@ spring:
       timeout: 5000
       database: 0 #默认是索引为0的数据库
 
+
+  servlet:
+    multipart:
+      max-file-size: 30MB
+      max-request-size: 30MB
+
 server:
-  port: 8090
+  port: 8060
   servlet:
     context-path: /poetry
 

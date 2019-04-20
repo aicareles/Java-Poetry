@@ -1,5 +1,6 @@
 package com.jerry.poetry.controller;
 
+import com.jerry.poetry.authorization.annotation.Authorization;
 import com.jerry.poetry.base.ResultCode;
 import com.jerry.poetry.util.ResultUtils;
 import com.jerry.poetry.domain.Poetry;
@@ -46,8 +47,8 @@ public class PoetryController {
 //    }
 
     //随机获取推荐的一篇文章
+//    @Authorization //此注解表示需要进行token验证
     @PostMapping(value = "/randomOnePoetry")
-    @RequiresPermissions("poetrys:randomOnePoetry")
     public Result<Poetry> randomOnePoetry(){
         int counts = (int) poetryRepository.count();
         int id = new Random().nextInt(counts);
@@ -55,8 +56,8 @@ public class PoetryController {
     }
 
     //随机获取推荐的十篇文章
+//    @RequiresPermissions("poetrys:randomTenPoetry")  //此注解  需要查看该用户是否具有权限  一般删除操作需要验证
     @PostMapping(value = "/randomTenPoetry")
-    @RequiresPermissions("poetrys:randomTenPoetry")
     public Result<Poetry> randomTenPoetry(){
         int counts = (int) poetryRepository.count();
         List<Integer> list  = new ArrayList<>();
@@ -73,7 +74,6 @@ public class PoetryController {
     //通过诗人名称、诗标题、诗内容等  获该相关信息
     @Cacheable(value="searchPoetry")
     @PostMapping(value = "/searchPoetry")
-    @RequiresPermissions("poetrys:searchPoetry")
     public Result<Poetry> searchResult(@Param("page")Integer page, @Param("keyword")String keyword){
         if(StringUtils.isEmpty(keyword) || StringUtils.isEmpty(page)){
             return ResultUtils.error(ResultCode.INVALID_PARAM_EMPTY);

@@ -29,7 +29,6 @@ public class AuthorController {
 
     @Cacheable(value="poemInfo")
     @PostMapping(value = "/poemInfo")
-    @RequiresPermissions("poem:poemInfo")
     public Result<Author> author(@RequestParam("author_id") int author_id, @RequestParam("author_name")String author_name) {
         if(StringUtils.isEmpty(author_id) || StringUtils.isEmpty(author_name)){
             return ResultUtils.error(ResultCode.INVALID_PARAM_EMPTY);

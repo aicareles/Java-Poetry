@@ -34,6 +34,25 @@ spring:
       max-file-size: 30MB
       max-request-size: 30MB
 
+  mail:
+    protocol: smtp
+    host: smtp.qq.com
+    port: 25
+#    smtpAuth: true
+#    smtpStarttlsEnable: true
+#    smtpSslTrust: smtp.qq.com
+    # 此处 username 为邮箱名称
+    username: 823581722@qq.com
+    # 此处 password 为授权码
+    password: eitsmlntwporbbeh
+    properties:
+              mail:
+                smtp:
+                  auth: true//这样才能通过验证
+                  starttls:
+                      enable: true
+                      required: true
+
 server:
   port: 8060
   servlet:

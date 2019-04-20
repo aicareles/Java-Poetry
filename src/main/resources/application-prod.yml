@@ -27,8 +27,32 @@ spring:
         timeout: 5000
         database: 0 #默认是索引为0的数据库
 
+  servlet:
+      multipart:
+        max-file-size: 30MB
+        max-request-size: 30MB
+
+  mail:
+      protocol: smtp
+      host: smtp.qq.com
+      port: 25
+  #    smtpAuth: true
+  #    smtpStarttlsEnable: true
+  #    smtpSslTrust: smtp.qq.com
+      # 此处 username 为邮箱名称
+      username: 823581722@qq.com
+      # 此处 password 为授权码
+      password: eitsmlntwporbbeh
+      properties:
+                mail:
+                  smtp:
+                    auth: true//这样才能通过验证
+                    starttls:
+                        enable: true
+                        required: true
+
 
 server:
-  port: 80
+  port: 8090
   servlet:
     context-path: /poetry

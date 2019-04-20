@@ -13,7 +13,7 @@ public enum ResultCode {
     /**
      * 未登录/token过期
      */
-    UNAUTHORIZED(1002, "获取登录用户信息失败"),
+    UNAUTHORIZED(401, "token验证失败,请重新登录!"),
     /**
      * 失败
      */
@@ -60,14 +60,12 @@ public enum ResultCode {
     /**
      * 没有权限
      */
-    USER_NO_PERMITION(1013, "当前用户无该接口权限"),
+    NO_PERMITION(403, "您没有访问权限"),
 
     /**
      * 未查询到相关信息
      */
     NO_FIND_THINGS(1012, "未查询到相关信息");
-
-
 
     public int code;
     public String msg;

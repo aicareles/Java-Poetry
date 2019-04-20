@@ -1,0 +1,48 @@
+package com.jerry.poetry.authorization.resolvers;
+
+import com.jerry.poetry.authorization.annotation.CurrentUser;
+import com.jerry.poetry.constant.C;
+import com.jerry.poetry.domain.shiro.User;
+import com.jerry.poetry.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.MethodParameter;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.support.WebDataBinderFactory;
+import org.springframework.web.context.request.NativeWebRequest;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.method.support.ModelAndViewContainer;
+import org.springframework.web.multipart.support.MissingServletRequestPartException;
+
+/**
+* @Description:    增加方法注入，将含有CurrentUser注解的方法参数注入当前登录用户
+* @Author:         liulei
+* @CreateDate:     2018/7/13 9:39
+*/
+@Component
+public class CurrentUserMethodArgumentResolver implements HandlerMethodArgumentResolver {
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Override
+    public boolean supportsParameter(MethodParameter parameter) {
+        //如果参数类型是User并且有CurrentUser注解则支持
+        if (parameter.getParameterType().isAssignableFrom(User.class) &&
+                parameter.hasParameterAnnotation(CurrentUser.class)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
+        //取出鉴权时存入的登录用户Id
+        Long currentUserId = (Long) webRequest.getAttribute(C.CURRENT_USER_ID, RequestAttributes.SCOPE_REQUEST);
+        if (currentUserId != null) {
+            //从数据库中查询并返回
+            return userRepository.findById(currentUserId);
+        }
+        throw new MissingServletRequestPartException(C.CURRENT_USER_ID);
+    }
+}

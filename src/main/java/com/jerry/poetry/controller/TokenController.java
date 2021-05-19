@@ -9,16 +9,18 @@ import com.jerry.poetry.domain.shiro.User;
 import com.jerry.poetry.repository.UserRepository;
 import com.jerry.poetry.util.ResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.Optional;
 
 /**
-* @Description:    获取和删除token的请求地址，在Restful设计中其实就对应着登录和退出登录的资源映射
-* @Author:         liulei
-* @CreateDate:     2018/7/13 9:43
-*/
+ * @Description: 获取和删除token的请求地址，在Restful设计中其实就对应着登录和退出登录的资源映射
+ * @Author: liulei
+ * @CreateDate: 2018/7/13 9:43
+ */
 @RestController
 @RequestMapping("/poetrys")
 public class TokenController {
@@ -33,7 +35,7 @@ public class TokenController {
     public Result<User> register(@RequestParam(value = "username", required = true) String username,
                                  @RequestParam(value = "password", required = true) String password) {
 
-        if(StringUtils.isEmpty(username) || StringUtils.isEmpty(password)){
+        if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
             return ResultUtils.error(ResultCode.INVALID_PARAM_EMPTY);
         }
         User user = new User();
@@ -45,7 +47,12 @@ public class TokenController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Result<User> login(@RequestParam String username, @RequestParam String password) {
-        User user = userRepository.findByUsername(username);
+        User u = new User();
+        u.setUsername(username);
+        Example<User> example = Example.of(u);
+        Optional<User> optionalUser = userRepository.findOne(example);
+
+        User user = optionalUser.orElse(null);
         if (user == null ||  //未注册
                 !user.getPassword().equals(password)) {  //密码错误
             //提示用户名或密码错误
